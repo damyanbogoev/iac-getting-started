@@ -1,0 +1,12 @@
+#cloud-config
+package_upgrade: false
+package_update: true
+packages:
+  - httpd
+runcmd:
+  - [firewall-cmd, --permanent, --add-port=80/tcp]
+  - [firewall-cmd, --permanent, --add-port=443/tcp]
+  - [systemctl, start, httpd]
+  - [systemctl, enable, httpd]
+power_state:
+  mode: reboot
